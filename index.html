@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hiếu Bùi — Landscape Photographer, Hà Nội</title>
+<meta name="description" content="Portfolio of Hiếu Bùi, landscape & city photographer based in Hà Nội. Golden hour, seasonal streets, published cover art and editorial licensing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300;1,9..144,400&family=Be+Vietnam+Pro:wght@300;400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#14110d; --ink2:#1f1c17; --olive:#3b372b; --bronze:#58422a;
+  --amber:#e9a23b; --ember:#d9692b; --sand:#ddcca4; --paper:#f3ebdd; --sage:#585f59;
+  --muted:#a39580;
+  --serif:"Fraunces",Georgia,"Times New Roman",serif;
+  --sans:"Be Vietnam Pro",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --ease:cubic-bezier(.2,.7,.1,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--paper);font-family:var(--sans);font-weight:300;line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--amber);color:var(--ink)}
+.wrap{width:min(1280px,92vw);margin:0 auto}
+.mono{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+em{font-style:italic;color:var(--amber)}
+
+/* ---------- film grain ---------- */
+.grain{position:fixed;inset:-50%;width:200%;height:200%;pointer-events:none;z-index:90;opacity:.09;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1s steps(6) infinite}
+@keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-4%)}60%{transform:translate(-4%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
+
+/* ---------- loader: sun rising over the lake ---------- */
+.loader{position:fixed;inset:0;z-index:100;background:var(--ink);display:grid;place-items:center;transition:opacity .9s var(--ease),visibility .9s}
+.loader.done{opacity:0;visibility:hidden}
+.loader .scene{position:relative;width:220px;height:130px;overflow:hidden}
+.loader .sun{position:absolute;left:50%;bottom:-70px;width:90px;height:90px;margin-left:-45px;border-radius:50%;
+  background:radial-gradient(circle,#ffd27a 0%,var(--amber) 45%,var(--ember) 100%);box-shadow:0 0 60px 10px rgba(233,162,59,.45);
+  animation:rise 1.8s var(--ease) forwards}
+.loader .horizon{position:absolute;left:0;right:0;bottom:30px;height:1px;background:var(--sand);transform:scaleX(0);animation:line 1s var(--ease) .1s forwards}
+.loader .water{position:absolute;left:0;right:0;bottom:0;height:30px;background:var(--ink)}
+.loader .water i{position:absolute;left:50%;height:2px;background:var(--amber);border-radius:2px;opacity:0;transform:translateX(-50%);animation:shimmer 1.2s ease .9s forwards}
+.loader p{margin-top:28px;text-align:center;font-family:var(--serif);font-style:italic;font-size:1.15rem;color:var(--sand);opacity:0;animation:fade .8s ease .7s forwards}
+@keyframes rise{to{bottom:42px}}
+@keyframes line{to{transform:scaleX(1)}}
+@keyframes shimmer{to{opacity:.8}}
+@keyframes fade{to{opacity:1}}
+
+/* ---------- cursor ---------- */
+.cursor{position:fixed;left:0;top:0;width:34px;height:34px;margin:-17px 0 0 -17px;border:1px solid var(--amber);border-radius:50%;pointer-events:none;z-index:95;
+  transition:width .3s var(--ease),height .3s var(--ease),margin .3s var(--ease),background .3s;mix-blend-mode:difference}
+.cursor.big{width:84px;height:84px;margin:-42px 0 0 -42px;background:rgba(233,162,59,.15)}
+.cursor span{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--mono);font-size:.55rem;letter-spacing:.15em;color:var(--amber);opacity:0;transition:opacity .2s}
+.cursor.big span{opacity:1}
+@media (hover:none){.cursor{display:none}}
+
+/* ---------- nav ---------- */
+.progress{position:fixed;top:0;left:0;height:2px;width:100%;background:linear-gradient(90deg,var(--ember),var(--amber));transform-origin:0 50%;transform:scaleX(0);z-index:80}
+nav{position:fixed;top:0;left:0;right:0;z-index:70;display:flex;justify-content:space-between;align-items:center;padding:22px 4vw;transition:background .4s,padding .4s}
+nav.solid{background:rgba(20,17,13,.82);backdrop-filter:blur(10px);padding:14px 4vw}
+nav .brand{font-family:var(--serif);font-size:1.2rem;font-weight:500;letter-spacing:.01em}
+nav .brand b{color:var(--amber);font-weight:500}
+nav ul{display:flex;gap:2.2rem;list-style:none}
+nav ul a{font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sand);position:relative}
+nav ul a::after{content:"";position:absolute;left:0;bottom:-4px;height:1px;width:100%;background:var(--amber);transform:scaleX(0);transform-origin:right;transition:transform .4s var(--ease)}
+nav ul a:hover::after{transform:scaleX(1);transform-origin:left}
+@media(max-width:760px){nav ul{display:none}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;height:100svh;min-height:620px;overflow:hidden;display:flex;align-items:flex-end}
+.hero .bg{position:absolute;inset:0;background:center 60%/cover no-repeat url(img/050d0f0d.jpg);transform:scale(1.15);animation:kenburns 22s ease-out forwards}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,17,13,.35) 0%,rgba(20,17,13,.05) 35%,rgba(20,17,13,.55) 70%,var(--ink) 100%)}
+@keyframes kenburns{to{transform:scale(1.02) translateY(-1.5%)}}
+.hero .content{position:relative;z-index:2;padding-bottom:9vh}
+.hero h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.8rem,8.4vw,7.6rem);line-height:.95;letter-spacing:-.025em;max-width:13ch}
+.hero h1 .line{display:block;overflow:hidden}
+.hero h1 .line>span{display:inline-block;transform:translateY(110%);transition:transform 1.3s var(--ease)}
+.ready .hero h1 .line>span{transform:none}
+.ready .hero h1 .line:nth-child(2)>span{transition-delay:.12s}
+.ready .hero h1 .line:nth-child(3)>span{transition-delay:.24s}
+.hero .sub{margin-top:2rem;display:flex;flex-wrap:wrap;gap:2.5rem;align-items:flex-end;justify-content:space-between;opacity:0;transform:translateY(20px);transition:all 1.2s var(--ease) .6s}
+.ready .hero .sub{opacity:1;transform:none}
+.hero .sub p{max-width:440px;color:var(--sand);font-size:1.05rem}
+.hero .meta{display:flex;gap:2rem}
+.hero .meta div{border-left:1px solid rgba(221,204,164,.35);padding-left:1rem}
+.hero .meta strong{display:block;font-weight:400;color:var(--paper);font-size:.95rem}
+.scrollcue{position:absolute;right:4vw;bottom:9vh;z-index:2;writing-mode:vertical-rl;display:flex;align-items:center;gap:12px}
+.scrollcue i{width:1px;height:60px;background:linear-gradient(var(--amber),transparent);animation:cue 2s ease-in-out infinite}
+@keyframes cue{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@media(max-width:760px){.scrollcue{display:none}.hero .meta{gap:1rem}}
+
+/* ---------- marquee ---------- */
+.marquee{border-top:1px solid rgba(221,204,164,.14);border-bottom:1px solid rgba(221,204,164,.14);overflow:hidden;padding:22px 0;white-space:nowrap}
+.marquee .run{display:inline-flex;animation:marq 38s linear infinite}
+.marquee span{font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(1.4rem,3vw,2.3rem);color:var(--sand);padding:0 1.6rem}
+.marquee span.dot{color:var(--amber);font-style:normal;padding:0}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ---------- sections ---------- */
+section{position:relative}
+.pad{padding:clamp(90px,14vh,160px) 0}
+.head{display:grid;grid-template-columns:120px 1fr;gap:2rem;margin-bottom:clamp(48px,8vh,90px)}
+.head .num{font-family:var(--mono);font-size:.8rem;color:var(--amber);padding-top:.9rem;letter-spacing:.1em}
+.head h2{font-family:var(--serif);font-weight:300;font-size:clamp(2.2rem,5.4vw,4.6rem);line-height:1.02;letter-spacing:-.02em}
+.head p{margin-top:1.2rem;max-width:620px;color:var(--sand)}
+@media(max-width:760px){.head{grid-template-columns:1fr;gap:.4rem}}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(40px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
+.wipe{background:transparent}
+.wipe img{clip-path:inset(100% 0 0 0);transform:scale(1.18);transition:clip-path 1.4s var(--ease),transform 2.2s var(--ease)}
+.wipe.in img{clip-path:inset(0 0 0 0);transform:scale(1)}
+.wipe.in:hover img{transform:scale(1.045)}
+
+/* ---------- stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(221,204,164,.14)}
+.stats div{padding:2.4rem 1.6rem 2.2rem 0;border-right:1px solid rgba(221,204,164,.14)}
+.stats div:last-child{border-right:0}
+.stats div+div{padding-left:1.6rem}
+.stats strong{display:block;font-family:var(--serif);font-weight:300;font-size:clamp(2.4rem,4.6vw,3.8rem);line-height:1;color:var(--paper)}
+.stats strong sup{font-size:.4em;color:var(--amber);vertical-align:top;margin-left:4px}
+.stats span{display:block;margin-top:.8rem;color:var(--muted);font-size:.85rem}
+@media(max-width:760px){.stats{grid-template-columns:1fr 1fr}.stats div{border-right:0;border-bottom:1px solid rgba(221,204,164,.14);padding-left:0!important}}
+
+/* ---------- figure / viewfinder hover ---------- */
+.fig{position:relative;overflow:hidden;cursor:zoom-in;background:var(--ink2)}
+.fig img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease),filter .6s}
+.fig:hover img{transform:scale(1.045)}
+.fig .vf{position:absolute;inset:14px;pointer-events:none}
+.fig .vf i{position:absolute;width:22px;height:22px;border-color:var(--amber);border-style:solid;opacity:0;transition:all .5s var(--ease)}
+.fig .vf i:nth-child(1){top:12px;left:12px;border-width:1px 0 0 1px}
+.fig .vf i:nth-child(2){top:12px;right:12px;border-width:1px 1px 0 0}
+.fig .vf i:nth-child(3){bottom:12px;left:12px;border-width:0 0 1px 1px}
+.fig .vf i:nth-child(4){bottom:12px;right:12px;border-width:0 1px 1px 0}
+.fig:hover .vf i{opacity:1;top:0;left:auto}
+.fig:hover .vf i:nth-child(1){top:0;left:0}.fig:hover .vf i:nth-child(2){top:0;right:0}
+.fig:hover .vf i:nth-child(3){bottom:0;left:0;top:auto}.fig:hover .vf i:nth-child(4){bottom:0;right:0;top:auto}
+.fig figcaption{position:absolute;left:0;right:0;bottom:0;padding:44px 22px 18px;background:linear-gradient(transparent,rgba(20,17,13,.85));transform:translateY(100%);transition:transform .6s var(--ease)}
+.fig:hover figcaption{transform:none}
+.fig figcaption b{display:block;font-family:var(--serif);font-weight:400;font-size:1.1rem}
+.fig figcaption small{font-family:var(--mono);font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;color:var(--amber)}
+@media(hover:none){.fig figcaption{transform:none}}
+
+/* ---------- commissions ---------- */
+.commission{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(40px,6vw,96px);align-items:center}
+.cover-stage{position:relative;aspect-ratio:1/1;max-width:540px}
+.vinyl{position:absolute;top:4%;left:4%;width:92%;height:92%;border-radius:50%;
+  background:radial-gradient(circle,var(--amber) 0 9%,#111 9.5% 11%,#1a1814 11.5% 100%),#111;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.04);transition:transform 1.6s var(--ease) .3s}
+.vinyl::before{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-radial-gradient(circle,transparent 0 3px,rgba(255,255,255,.035) 3px 4px)}
+.cover-stage.in .vinyl{transform:translateX(34%) rotate(200deg)}
+.cover{position:relative;width:100%;height:100%;box-shadow:0 40px 80px -20px rgba(0,0,0,.8)}
+.cover img{width:100%;height:100%;object-fit:cover;object-position:50% 62%}
+.cover .title{position:absolute;left:7%;bottom:7%;font-family:var(--serif);font-style:italic;font-weight:300;font-size:clamp(1rem,2.1vw,1.55rem);line-height:1.15;color:#fff;max-width:55%;text-shadow:0 2px 18px rgba(0,0,0,.6)}
+.cover .artist{position:absolute;right:7%;top:7%;font-family:var(--mono);font-size:.7rem;letter-spacing:.3em;color:#fff}
+.mock-note{margin-top:14px;font-size:.72rem;color:var(--muted)}
+.ctext .tag{display:inline-block;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:var(--amber);padding:5px 10px;margin-bottom:1.4rem}
+.ctext h3{font-family:var(--serif);font-weight:300;font-size:clamp(1.8rem,3.4vw,2.8rem);line-height:1.08;letter-spacing:-.01em}
+.ctext dl{margin:2rem 0;display:grid;grid-template-columns:120px 1fr;row-gap:.9rem;border-top:1px solid rgba(221,204,164,.14);padding-top:1.4rem}
+.ctext dt{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding-top:.25rem}
+.ctext dd{color:var(--sand)}
+.platforms{display:flex;flex-wrap:wrap;gap:.6rem}
+.platforms span{border:1px solid rgba(221,204,164,.3);border-radius:99px;padding:6px 14px;font-size:.8rem}
+.btn{display:inline-flex;align-items:center;gap:.8rem;border:1px solid var(--amber);color:var(--amber);padding:14px 26px;border-radius:99px;font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;transition:background .4s,color .4s}
+.btn:hover{background:var(--amber);color:var(--ink)}
+.btn svg{transition:transform .4s var(--ease)}.btn:hover svg{transform:translateX(4px)}
+@media(max-width:900px){.commission{grid-template-columns:1fr}.cover-stage{max-width:420px;margin-right:18%}}
+
+.editorial{margin-top:clamp(100px,16vh,180px);display:grid;grid-template-columns:repeat(12,1fr);gap:20px;align-items:end}
+.editorial .ctext{grid-column:1/6;align-self:center;padding-right:2rem}
+.editorial .e1{grid-column:6/9;aspect-ratio:2/3}
+.editorial .e2{grid-column:9/13;aspect-ratio:2/3;margin-bottom:12%}
+.feed{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem}
+.feed span{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--paper);border-bottom:1px solid var(--amber);padding-bottom:2px}
+@media(max-width:900px){.editorial .ctext{grid-column:1/-1;padding:0 0 1rem}.editorial .e1{grid-column:1/7}.editorial .e2{grid-column:7/13;margin:0}}
+
+/* ---------- horizontal series (Last Light) ---------- */
+.hs{position:relative}
+.hs .sticky{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;align-items:center}
+.hs .track{display:flex;gap:28px;padding-left:4vw;will-change:transform;align-items:center}
+.hs .intro{flex:0 0 min(460px,80vw);padding-right:3rem}
+.hs .intro h3{font-family:var(--serif);font-weight:300;font-size:clamp(2.6rem,5vw,4.4rem);line-height:1;letter-spacing:-.02em}
+.hs .intro p{margin-top:1.4rem;color:var(--sand)}
+.hs .fig{flex:0 0 auto;height:72vh}
+.hs .fig.p{aspect-ratio:2/3}.hs .fig.s{aspect-ratio:4/5}.hs .fig.l{aspect-ratio:3/2}
+.hs .fig.low{align-self:flex-end;height:62vh;margin-bottom:6vh}
+.hs .fig.high{align-self:flex-start;height:62vh;margin-top:8vh}
+.hs .end{flex:0 0 6vw}
+.hs .counter{position:absolute;left:4vw;bottom:5vh;display:flex;gap:1rem;align-items:center}
+.hs .bar{width:160px;height:1px;background:rgba(221,204,164,.2);position:relative}
+.hs .bar i{position:absolute;inset:0;background:var(--amber);transform-origin:0 50%;transform:scaleX(0)}
+@media(max-width:800px){
+  .hs{height:auto!important}.hs .sticky{position:relative;height:auto;padding:90px 0}
+  .hs .track{flex-direction:column;align-items:stretch;padding:0 4vw;transform:none!important}
+  .hs .fig,.hs .fig.low,.hs .fig.high{height:auto;width:100%;margin:0;align-self:auto}
+  .hs .counter,.hs .end{display:none}
+}
+
+/* ---------- grid series ---------- */
+.series{padding:clamp(90px,14vh,150px) 0;border-top:1px solid rgba(221,204,164,.1)}
+.series-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;margin-bottom:56px;flex-wrap:wrap}
+.series-head .roman{font-family:var(--serif);font-style:italic;color:var(--amber);font-size:1.2rem}
+.series-head h3{font-family:var(--serif);font-weight:300;font-size:clamp(2.2rem,4.6vw,3.8rem);line-height:1.02;letter-spacing:-.02em}
+.series-head h3 small{display:block;font-family:var(--sans);font-size:.9rem;letter-spacing:.04em;color:var(--muted);margin-top:.6rem;font-weight:300}
+.series-head p{max-width:420px;color:var(--sand)}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:20px}
+.g-a{grid-column:1/8;grid-row:span 2;aspect-ratio:2/3}
+.g-b{grid-column:8/13;aspect-ratio:4/5}
+.g-c{grid-column:8/13;aspect-ratio:4/5}
+.g-d{grid-column:1/5;aspect-ratio:2/3}
+.g-e{grid-column:5/13;aspect-ratio:3/2;align-self:end}
+.g-f{grid-column:1/6;aspect-ratio:2/3}
+.g-g{grid-column:6/13;aspect-ratio:3/2;align-self:center}
+.g-h{grid-column:1/8;aspect-ratio:3/2}
+.g-i{grid-column:8/13;aspect-ratio:2/3}
+.g-half{grid-column:span 6;aspect-ratio:4/5}
+.g-wide{grid-column:1/-1;aspect-ratio:2/1}
+@media(max-width:760px){.grid>*{grid-column:1/-1!important;grid-row:auto!important}}
+
+
+/* the soul case */
+.soul{margin-top:clamp(100px,16vh,180px);display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(40px,6vw,90px);align-items:center}
+.soul-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.soul-grid .s1,.soul-grid .s2{aspect-ratio:2/3}
+.soul-grid .s2{margin-top:18%}
+.soul-grid .s3{grid-column:1/-1;aspect-ratio:3/2;width:86%;margin-left:14%;margin-top:-6%}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(221,204,164,.14);border-bottom:1px solid rgba(221,204,164,.14);margin:1.8rem 0}
+.kpis div{padding:1.1rem 0 1rem}
+.kpis div+div{padding-left:1rem;border-left:1px solid rgba(221,204,164,.14)}
+.kpis strong{display:block;font-family:var(--serif);font-weight:300;font-size:2rem;line-height:1}
+.kpis strong sup{font-size:.45em;color:var(--amber);vertical-align:top;margin-left:2px}
+.kpis span{font-size:.75rem;color:var(--muted)}
+.insight{font-family:var(--serif);font-style:italic;font-size:1.15rem;color:var(--paper);border-left:2px solid var(--amber);padding-left:1rem;margin-bottom:2rem}
+@media(max-width:900px){.soul{grid-template-columns:1fr}.soul-grid .s2{margin-top:0}.soul-grid .s3{width:100%;margin:0}}
+@media(max-width:500px){.kpis{grid-template-columns:1fr 1fr}.kpis div:nth-child(3){padding-left:0;border-left:0}}
+.g-third{grid-column:span 4;aspect-ratio:2/3}
+.g-center{grid-column:4/10;aspect-ratio:2/3}
+
+/* ---------- process ---------- */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(221,204,164,.14)}
+.step{padding:2.4rem 1.8rem 2.4rem 0;border-right:1px solid rgba(221,204,164,.14);position:relative}
+.step+.step{padding-left:1.8rem}
+.step:last-child{border-right:0}
+.step .n{font-family:var(--mono);font-size:.72rem;color:var(--amber);letter-spacing:.12em}
+.step h4{font-family:var(--serif);font-weight:400;font-size:1.6rem;margin:1rem 0 .8rem}
+.step p{color:var(--sand);font-size:.95rem}
+.step::before{content:"";position:absolute;top:-1px;left:0;height:1px;width:100%;background:var(--amber);transform:scaleX(0);transform-origin:left;transition:transform 1.4s var(--ease)}
+.step.in::before{transform:scaleX(1)}
+@media(max-width:900px){.steps{grid-template-columns:1fr 1fr}.step{border-right:0;padding-left:0!important}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+.kit{margin-top:70px;display:grid;grid-template-columns:1fr 1.4fr;gap:4rem;align-items:center}
+.kit h4{font-family:var(--serif);font-weight:300;font-size:2rem;line-height:1.1}
+.kit ul{list-style:none;margin-top:1.4rem}
+.kit li{display:flex;justify-content:space-between;padding:.9rem 0;border-bottom:1px solid rgba(221,204,164,.12);font-size:.95rem}
+.kit li span:last-child{color:var(--sand)}
+.palette{display:flex;height:220px;border-radius:2px;overflow:hidden}
+.palette div{flex:1;position:relative;transition:flex .7s var(--ease)}
+.palette div:hover{flex:2.4}
+.palette div span{position:absolute;left:12px;bottom:12px;font-family:var(--mono);font-size:.62rem;letter-spacing:.08em;color:rgba(255,255,255,.85);writing-mode:vertical-rl;transform:rotate(180deg)}
+.palette-cap{margin-top:12px}
+@media(max-width:900px){.kit{grid-template-columns:1fr;gap:2rem}}
+
+/* ---------- critique ---------- */
+.notes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.note{border:1px solid rgba(221,204,164,.14);padding:2rem;background:linear-gradient(160deg,rgba(233,162,59,.06),transparent 60%);transition:border-color .5s,transform .6s var(--ease)}
+.note:hover{border-color:rgba(233,162,59,.6);transform:translateY(-6px)}
+.note .big{font-family:var(--serif);font-weight:300;font-size:3rem;line-height:1;color:var(--amber)}
+.note .big small{font-size:.35em;color:var(--muted);margin-left:.4rem;font-family:var(--mono);letter-spacing:.1em}
+.note h4{font-family:var(--serif);font-weight:400;font-size:1.35rem;margin:1.2rem 0 .7rem;line-height:1.25}
+.note p{color:var(--sand);font-size:.93rem}
+@media(max-width:900px){.notes{grid-template-columns:1fr}}
+
+/* ---------- contact ---------- */
+.contact{position:relative;min-height:90vh;display:flex;align-items:center;overflow:hidden}
+.contact .bg{position:absolute;inset:-10% 0;background:center/cover no-repeat url(img/44ea6b48.jpg);opacity:.45;will-change:transform}
+.contact::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 60%,transparent 0%,var(--ink) 75%)}
+.contact .wrap{position:relative;z-index:2;text-align:center}
+.contact h2{font-family:var(--serif);font-weight:300;font-size:clamp(2.6rem,7vw,6.4rem);line-height:1;letter-spacing:-.025em}
+.contact p{margin:1.6rem auto 2.6rem;max-width:520px;color:var(--sand)}
+footer{padding:28px 4vw;display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(221,204,164,.1)}
+
+/* ---------- lightbox ---------- */
+.lb{position:fixed;inset:0;z-index:99;background:rgba(14,12,9,.96);display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transition:opacity .5s,visibility .5s}
+.lb.open{opacity:1;visibility:visible}
+.lb img{max-width:90vw;max-height:80vh;object-fit:contain;transform:scale(.96);transition:transform .7s var(--ease),opacity .3s}
+.lb.open img{transform:none}
+.lb .cap{position:absolute;bottom:4vh;left:0;right:0;text-align:center}
+.lb .cap b{font-family:var(--serif);font-weight:400;font-size:1.3rem;display:block}
+.lb button{position:absolute;background:none;border:0;color:var(--sand);font-family:var(--mono);font-size:.75rem;letter-spacing:.15em;cursor:pointer;padding:16px}
+.lb button:hover{color:var(--amber)}
+.lb .x{top:2vh;right:2vw}.lb .prev{left:1vw;top:50%}.lb .next{right:1vw;top:50%}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+  .rv{opacity:1;transform:none}.wipe img{clip-path:none!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"><span>VIEW</span></div>
+<div class="progress" aria-hidden="true"></div>
+
+<div class="loader" aria-hidden="true">
+  <div>
+    <div class="scene"><div class="sun"></div><div class="horizon"></div><div class="water"><i style="bottom:18px;width:70px"></i><i style="bottom:10px;width:44px;animation-delay:1s"></i><i style="bottom:3px;width:22px;animation-delay:1.1s"></i></div></div>
+    <p>waiting for the light…</p>
+  </div>
+</div>
+
+<nav id="nav">
+  <a class="brand" href="#top">Hiếu <b>Bùi</b></a>
+  <ul>
+    <li><a href="#work">Published</a></li>
+    <li><a href="#series">Series</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#eye">Critique</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<header class="hero" id="top">
+  <div class="bg" role="img" aria-label="Two cyclists silhouetted against a golden sunset over West Lake, Hà Nội"></div>
+  <div class="wrap content">
+    <p class="mono rv in" style="margin-bottom:1.6rem">Landscape &amp; city photographer — Hà Nội, Việt Nam</p>
+    <h1><span class="line"><span>Chasing the</span></span><span class="line"><span><em>last light</em> of</span></span><span class="line"><span>Hà Nội.</span></span></h1>
+    <div class="sub">
+      <p>I photograph the city at its quietest hours — golden sunsets over the lakes, seasonal blooms on old streets, and the small human moments in between.</p>
+      <div class="meta">
+        <div><span class="mono">Camera</span><strong>Canon EOS R50</strong></div>
+        <div><span class="mono">Grade</span><strong>Adobe Lightroom</strong></div>
+        <div><span class="mono">Channel</span><strong>@hieuicon262</strong></div>
+      </div>
+    </div>
+  </div>
+  <div class="scrollcue mono">Scroll <i></i></div>
+</header>
+
+<div class="marquee" aria-hidden="true"><div class="run">
+  <span>Hồ Tây</span><span class="dot">✦</span><span>Hồ Gươm</span><span class="dot">✦</span><span>Hoa sưa</span><span class="dot">✦</span><span>Golden hour</span><span class="dot">✦</span><span>Phố cổ</span><span class="dot">✦</span><span>Cúc họa mi</span><span class="dot">✦</span><span>Mùa thu Hà Nội</span><span class="dot">✦</span>
+  <span>Hồ Tây</span><span class="dot">✦</span><span>Hồ Gươm</span><span class="dot">✦</span><span>Hoa sưa</span><span class="dot">✦</span><span>Golden hour</span><span class="dot">✦</span><span>Phố cổ</span><span class="dot">✦</span><span>Cúc họa mi</span><span class="dot">✦</span><span>Mùa thu Hà Nội</span><span class="dot">✦</span>
+</div></div>
+
+<!-- ============ STATS ============ -->
+<section class="pad" style="padding-bottom:0">
+  <div class="wrap">
+    <div class="stats rv">
+      <div><strong data-count="435.7" data-dec="1">0<sup>K</sup></strong><span>likes on TikTok across my photo stories</span></div>
+      <div><strong data-count="246.6" data-dec="1">0<sup>K</sup></strong><span>views on my most-watched post — Hà Nội at dusk</span></div>
+      <div><strong data-count="8.1" data-dec="1">0<sup>K</sup></strong><span>followers who come for the light</span></div>
+      <div><strong data-count="3" data-dec="0">0<sup></sup></strong><span>streaming platforms carrying my cover art</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 01 PUBLISHED ============ -->
+<section class="pad" id="work">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="num">01 — Published</div>
+      <div><h2>Work out in<br><em>the world.</em></h2>
+      <p>Images licensed by artists and media pages — chosen because they already tell a story before a single word is added.</p></div>
+    </div>
+
+    <div class="commission">
+      <div>
+        <div class="cover-stage rv" id="coverStage">
+          <div class="vinyl"></div>
+          <div class="cover">
+            <img src="img/a60da713.jpg" alt="A young man with headphones sitting by Hoan Kiem Lake, backlit at golden hour">
+            <div class="title">Thế Giới Không<br>Còn Niềm Đau</div>
+            <div class="artist">KHIEM</div>
+          </div>
+        </div>
+        <p class="mock-note mono">Square cover crop — layout mock for this portfolio</p>
+      </div>
+      <div class="ctext rv d1">
+        <span class="tag">Cover art · Music</span>
+        <h3>Single cover for <em>“Thế Giới Không Còn Niềm Đau”</em> — Khiem</h3>
+        <dl>
+          <dt>Usage</dt><dd>Official single artwork, released April 2024</dd>
+          <dt>Platforms</dt><dd><div class="platforms"><span>Spotify</span><span>YouTube Music</span><span>Apple Music</span></div></dd>
+          <dt>The image</dt><dd>A listener in headphones by Hồ Gươm, backlit at golden hour. The turned-away subject lets anyone step into the frame; one warm tone, soft bokeh and a clear silhouette keep it readable even as a small thumbnail.</dd>
+        </dl>
+        <a class="btn" href="https://open.spotify.com/track/7KKxUP75hS89IVX6EtrjlQ" target="_blank" rel="noopener">Listen on Spotify <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h15m-4-4 4 4-4 4" stroke="currentColor"/></svg></a>
+      </div>
+    </div>
+
+    <div class="editorial">
+      <div class="ctext rv">
+        <span class="tag">Editorial licensing · Social media</span>
+        <h3>Seasonal Hà Nội, <em>shared</em> by the city’s own pages.</h3>
+        <p style="margin-top:1.2rem;color:var(--sand)">My seasonal series — hoa sưa in March, flower carts, cúc họa mi in early winter — has been licensed for posts on Hà Nội community pages with large local audiences.</p>
+        <div class="feed"><span>Chuyện của Hà Nội</span><span>Lang thang Hà Nội</span></div>
+      </div>
+      <figure class="fig wipe e1" data-cap="Hoa sưa over the old railway|Seasons · March"><img src="img/d8a8395c.jpg" alt="White hoa sưa blossoms over an old railway track" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Seasons · March</small><b>Hoa sưa over the old railway</b></figcaption></figure>
+      <figure class="fig wipe e2" data-cap="The summer flower cart|Seasons · Early summer"><img src="img/083349b3.jpg" alt="A bicycle overflowing with sunflowers, lotus and hydrangeas" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Seasons · Early summer</small><b>The summer flower cart</b></figcaption></figure>
+    </div>
+
+    <div class="soul">
+      <div class="ctext rv">
+        <span class="tag">Social campaign · F&amp;B</span>
+        <h3>The Soul workshop &amp; coffee — <em>a sunset seat</em> above West Lake.</h3>
+        <p style="margin-top:1.2rem;color:var(--sand)">A six-image TikTok carousel selling one thing: the view from the café’s window at golden hour. Skyline first to stop the scroll, then the desk, the lamp and the people — so viewers picture themselves in the seat.</p>
+        <div class="kpis">
+          <div><strong data-count="11.7" data-dec="1">0<sup>K</sup></strong><span>likes</span></div>
+          <div><strong data-count="2.3" data-dec="1">0<sup>K</sup></strong><span>saves</span></div>
+          <div><strong data-count="1.5" data-dec="1">0<sup>K</sup></strong><span>shares</span></div>
+          <div><strong data-count="87" data-dec="0">0<sup></sup></strong><span>comments</span></div>
+        </div>
+        <p class="insight">Roughly one save for every five likes — people kept it as a place to go, not just a picture to scroll past.</p>
+        <a class="btn" href="https://www.tiktok.com/@hieuicon262/photo/7553622469802724609" target="_blank" rel="noopener">View the post <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h15m-4-4 4 4-4 4" stroke="currentColor"/></svg></a>
+        <p class="mono" style="margin-top:1.2rem">Posted September 2025 · Hà Nội</p>
+      </div>
+      <div class="soul-grid">
+<figure class="fig wipe s1" data-cap="Sheraton at dusk, from the window|The Soul · Slide 1"><img src="img/7f55a21e.jpg" alt="Silhouetted Sheraton hotel against an orange dusk sky over West Lake" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>The Soul · Slide 1</small><b>Sheraton at dusk, from the window</b></figcaption></figure>
+<figure class="fig wipe s2" data-cap="Window seat at sunset|The Soul · Interior"><img src="img/bb425bfc.jpg" alt="A laptop and desk lamp at a window overlooking West Lake at sunset" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>The Soul · Interior</small><b>Window seat at sunset</b></figcaption></figure>
+<figure class="fig wipe s3" data-cap="Studying through golden hour|The Soul · People"><img src="img/55ba7e96.jpg" alt="Two women studying at a window with an orange sunset sky behind" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>The Soul · People</small><b>Studying through golden hour</b></figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 02 SERIES ============ -->
+<section id="series">
+  <div class="wrap" style="padding-top:clamp(60px,10vh,110px)">
+    <div class="head rv" style="margin-bottom:0">
+      <div class="num">02 — Series</div>
+      <div><h2>Four ways of<br>looking at <em>one city.</em></h2>
+      <p>I work in series: returning to the same places across seasons and hours until the light, the subject and the frame line up.</p></div>
+    </div>
+  </div>
+
+  <!-- I. Last Light — horizontal -->
+  <div class="hs" id="hs">
+    <div class="sticky">
+      <div class="track">
+        <div class="intro">
+          <p class="mono" style="color:var(--amber)">Series I</p>
+          <h3>Last Light<br><em>on the Lakes</em></h3>
+          <p>Hồ Tây and Hồ Gươm in the twenty minutes before the sun drops behind the towers. Backlight, silhouettes, and the gold that bounces off the water.</p>
+        </div>
+        <figure class="fig p" data-cap="Storm light over West Lake|Hồ Tây · Sunset"><img src="img/44ea6b48.jpg" alt="Sunset breaking through storm clouds behind the West Lake skyline" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Hồ Tây · Sunset</small><b>Storm light over West Lake</b></figcaption></figure>
+        <figure class="fig s" data-cap="Four frames of one sunset|Hồ Tây · Sequence"><img src="img/b4dea63a.jpg" alt="Four-frame collage of a West Lake sunset" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Hồ Tây · Sequence</small><b>Four frames of one sunset</b></figcaption></figure>
+        <figure class="fig p high" data-cap="Afternoon exercise|Hồ Gươm · Late afternoon"><img src="img/95e868c7.jpg" alt="Women exercising under a flame tree by Hoan Kiem Lake" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Hồ Gươm · Late afternoon</small><b>Afternoon exercise</b></figcaption></figure>
+        <figure class="fig p" data-cap="Lakeside traffic, backlit|Hồ Gươm · Golden hour"><img src="img/7176b343.jpg" alt="Sun bursting through trees above cyclists and a motorbike by the lake" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Hồ Gươm · Golden hour</small><b>Lakeside traffic, backlit</b></figcaption></figure>
+        <figure class="fig p low" data-cap="The last sun on the towers|Hồ Tây · Blue hour"><img src="img/f75f484d.jpg" alt="Towers lit gold by the last sun against a teal sky over West Lake" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Hồ Tây · Blue hour</small><b>The last sun on the towers</b></figcaption></figure>
+<figure class="fig p high" data-cap="Bicycle by the lake|Lakeside · Haze"><img src="img/dace4731.jpg" alt="A child cycling along a lakeside path under trees in hazy light" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Lakeside · Haze</small><b>Bicycle by the lake</b></figcaption></figure>
+<figure class="fig p" data-cap="Starlight on the water|Hồ Tây · Texture"><img src="img/27b34eb3.jpg" alt="Dark rippling water with star-shaped glints of sunlight" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Hồ Tây · Texture</small><b>Starlight on the water</b></figcaption></figure>
+<figure class="fig p low" data-cap="Gradient hour|Skyline · Dusk"><img src="img/5b7529b6.jpg" alt="A blue-to-orange dusk gradient above a dark cloud bank and city towers" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Skyline · Dusk</small><b>Gradient hour</b></figcaption></figure>
+        <div class="end"></div>
+      </div>
+      <div class="counter mono"><span>I · Last Light</span><div class="bar"><i id="hsbar"></i></div><span id="hsn">01 / 08</span></div>
+    </div>
+  </div>
+
+  <!-- II. Seasons -->
+  <div class="series">
+    <div class="wrap">
+      <div class="series-head rv">
+        <div><span class="roman">Series II</span><h3>Seasons in Bloom<small>Mùa hoa Hà Nội — what the street sells tells you the month</small></h3></div>
+        <p>Hà Nội keeps time with flowers and fruit. Hoa sưa in March, lotus and sunflowers in summer, persimmons in autumn, cúc họa mi as winter arrives.</p>
+      </div>
+      <div class="grid">
+        <figure class="fig wipe g-a" data-cap="Cúc họa mi, held up to the street|Seasons · Early winter"><img src="img/d4ec88f5.jpg" alt="A hand holding a bouquet of small white daisies" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Seasons · Early winter</small><b>Cúc họa mi, held up to the street</b></figcaption></figure>
+        <figure class="fig wipe g-b" data-cap="Choosing hồng ngâm|Seasons · Autumn"><img src="img/04c0ecff.jpg" alt="Two women choosing persimmons from a street vendor's basket" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Seasons · Autumn</small><b>Choosing hồng ngâm</b></figcaption></figure>
+        <figure class="fig wipe g-c" data-cap="The rose cart on a quiet street|Seasons · Flower cart"><img src="img/50541d75.jpg" alt="A bicycle loaded with pink roses and daisies parked on a quiet Hà Nội street" loading="lazy" style="object-position:60% 70%"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Seasons · Flower cart</small><b>The rose cart on a quiet street</b></figcaption></figure>
+<figure class="fig wipe g-half" data-cap="Bằng lăng on campus|Seasons · Early summer"><img src="img/a6a2f7dc.jpg" alt="A tree covered in purple lagerstroemia flowers above students on benches" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Seasons · Early summer</small><b>Bằng lăng on campus</b></figcaption></figure>
+<figure class="fig wipe g-half" data-cap="Bougainvillea over the lake road|Hồ Tây · Overcast"><img src="img/bddad344.jpg" alt="Pink bougainvillea in the foreground of a lakeside road under a grey sky" loading="lazy" style="object-position:50% 70%"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Hồ Tây · Overcast</small><b>Bougainvillea over the lake road</b></figcaption></figure>
+      </div>
+    </div>
+  </div>
+
+  <!-- III. Streets -->
+  <div class="series">
+    <div class="wrap">
+      <div class="series-head rv">
+        <div><span class="roman">Series III</span><h3>Streets &amp; Shade<small>Phố cổ và những hàng cây — the architecture of the old city</small></h3></div>
+        <p>Century-old trees, French-era façades and the light that filters between them. Quiet frames that let the city’s structure do the talking.</p>
+      </div>
+      <div class="grid">
+        <figure class="fig wipe g-wide" data-cap="Morning rays, route 14|Street · Morning light"><img src="img/38663d43.jpg" alt="Sun rays through a tree canopy over traffic and a city bus" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Street · Morning light</small><b>Morning rays, route 14</b></figcaption></figure>
+        <figure class="fig wipe g-d" data-cap="Under the old canopy|Street · Morning"><img src="img/3d7c106a.jpg" alt="An empty tree-lined boulevard with sunlight filtering through" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Street · Morning</small><b>Under the old canopy</b></figcaption></figure>
+        <figure class="fig wipe g-e" data-cap="Tháp Rùa through the trees|Hồ Gươm · Overcast"><img src="img/3fc008e6.jpg" alt="Turtle Tower on Hoan Kiem Lake framed by trees and silhouettes" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Hồ Gươm · Overcast</small><b>Tháp Rùa through the trees</b></figcaption></figure>
+        <figure class="fig wipe g-half" data-cap="Long shadows, morning bus|Street · Morning light"><img src="img/0c88bc3b.jpg" alt="Long shadows of trees on a sidewalk with a green city bus" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Street · Morning light</small><b>Long shadows, morning bus</b></figcaption></figure>
+        <figure class="fig wipe g-half" data-cap="Hànộimới — the old sign|Hoàn Kiếm · Street"><img src="img/eab103ee.jpg" alt="Retro Hanoimoi sign on an old building behind leaves" loading="lazy" style="object-position:50% 35%"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Hoàn Kiếm · Street</small><b>Hànộimới — the old sign</b></figcaption></figure>
+        <figure class="fig wipe g-wide" data-cap="An elder photographer at golden hour|Street portrait"><img src="img/dae377e0.jpg" alt="An elderly man holding a Canon camera in warm backlight" loading="lazy" style="object-position:40% 8%"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Street portrait</small><b>An elder photographer at golden hour</b></figcaption></figure>
+<figure class="fig wipe g-third" data-cap="Floating stairs|Architecture · Blue sky"><img src="img/35179dfa.jpg" alt="White concrete staircase with rust-coloured railings against a blue sky" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Architecture · Blue sky</small><b>Floating stairs</b></figcaption></figure>
+<figure class="fig wipe g-third" data-cap="Evening walk in the park|Park · Late afternoon"><img src="img/ff55b814.jpg" alt="People walking along paths under tall trees in a sunlit park" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Park · Late afternoon</small><b>Evening walk in the park</b></figcaption></figure>
+<figure class="fig wipe g-third" data-cap="Rain under the streetlamp|Street · After dark"><img src="img/d27f5e5a.jpg" alt="Heavy rain lit orange by a streetlamp above a wet road with car lights" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Street · After dark</small><b>Rain under the streetlamp</b></figcaption></figure>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- IV. Cafe -->
+  <div class="series">
+    <div class="wrap">
+      <div class="series-head rv">
+        <div><span class="roman">Series IV</span><h3>Café Stories<small>Lifestyle &amp; F&amp;B — multi-frame sets built for social</small></h3></div>
+        <p>Hà Nội café culture told as a set: hero product, detail, people, brand mark. Sequenced and graded to read as one story in a carousel.</p>
+      </div>
+      <div class="grid">
+        <figure class="fig wipe g-half" data-cap="J’Ân — tea, coffee, pretzel|F&amp;B · Story set"><img src="img/469f9a6b.jpg" alt="Collage of iced drinks on a wooden tray, notes board, barista and logo curtain" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>F&amp;B · Story set</small><b>J’Ân — tea, coffee, pretzel</b></figcaption></figure>
+        <figure class="fig wipe g-half" data-cap="Courtyards &amp; Tiny Post|Lifestyle · Story set"><img src="img/ac5d7eed.jpg" alt="Collage of a café courtyard from above, a green garden, a selfie on a phone and drinks" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Lifestyle · Story set</small><b>Courtyards &amp; Tiny Post</b></figcaption></figure>
+<figure class="fig wipe g-center" data-cap="Christmas menu|F&amp;B · Seasonal menu"><img src="img/2616c18d.jpg" alt="Three festive drinks with ribbons beside Christmas decorations" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>F&amp;B · Seasonal menu</small><b>Christmas menu</b></figcaption></figure>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 03 PROCESS ============ -->
+<section class="pad" id="process" style="border-top:1px solid rgba(221,204,164,.1)">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="num">03 — Process</div>
+      <div><h2>From waiting<br>to <em>delivering.</em></h2>
+      <p>Most of a good landscape frame happens before the shutter: knowing where the sun will set, and being there twenty minutes early.</p></div>
+    </div>
+    <div class="steps">
+      <div class="step rv"><span class="n">01</span><h4>Scout</h4><p>Track sunset direction and the bloom calendar. Return to the same spot across days until the light, crowd and sky cooperate.</p></div>
+      <div class="step rv d1"><span class="n">02</span><h4>Capture</h4><p>Shoot RAW on the Canon EOS R50. Expose for the highlights, let silhouettes go dark, and use a long focal length to compress the skyline.</p></div>
+      <div class="step rv d2"><span class="n">03</span><h4>Grade</h4><p>Lightroom: warm amber highlights, olive-green shadows, lifted blacks and fine grain — one consistent look across every series.</p></div>
+      <div class="step rv d3"><span class="n">04</span><h4>Deliver</h4><p>Crop and export per use: square masters for streaming covers, 4:5 for feeds, 9:16 for TikTok, with safe space for titles.</p></div>
+    </div>
+
+    <div class="kit">
+      <div class="rv">
+        <h4>Toolkit &amp;<br><em>signature palette</em></h4>
+        <ul>
+          <li><span>Camera</span><span>Canon EOS R50</span></li>
+          <li><span>Editing &amp; colour</span><span>Adobe Lightroom</span></li>
+          <li><span>Formats</span><span>Cover art · Editorial · Social sets</span></li>
+          <li><span>Specialty</span><span>Golden hour · Seasonal city landscape</span></li>
+        </ul>
+      </div>
+      <div class="rv d1">
+        <div class="palette">
+          <div style="background:#1f1c17"><span>#1F1C17 shadow</span></div>
+          <div style="background:#3b372b"><span>#3B372B olive</span></div>
+          <div style="background:#585f59"><span>#585F59 sage</span></div>
+          <div style="background:#58422a"><span>#58422A bronze</span></div>
+          <div style="background:#946e41"><span>#946E41 honey</span></div>
+          <div style="background:#e9a23b"><span style="color:#1f1c17">#E9A23B sun</span></div>
+          <div style="background:#ddcca4"><span style="color:#1f1c17">#DDCCA4 haze</span></div>
+        </div>
+        <p class="palette-cap mono">Dominant tones sampled from six images in this portfolio</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 04 CRITIQUE ============ -->
+<section class="pad" id="eye" style="border-top:1px solid rgba(221,204,164,.1)">
+  <div class="wrap">
+    <div class="head rv">
+      <div class="num">04 — Critique</div>
+      <div><h2>What 435K likes<br>taught me about <em>a strong image.</em></h2>
+      <p>Posting to a real audience is a constant A/B test. These are the patterns I use to judge my own work — and anyone else’s.</p></div>
+    </div>
+    <div class="notes">
+      <div class="note rv"><div class="big">246.6K<small>vs ~1–7K</small></div><h4>One clear light event beats a pretty scene.</h4><p>A single, readable moment — the city going dark under a glowing sky — outperformed technically clean night streets by more than 30×. Viewers need to know what to look at within a second.</p></div>
+      <div class="note rv d1"><div class="big">163.9K<small>views</small></div><h4>Specific and seasonal beats generic.</h4><p>A street of white blossom says <em>this week, this city</em>. Timeliness gives people a reason to share and save, which a beautiful but timeless sunset rarely does.</p></div>
+      <div class="note rv d2"><div class="big">168.8K<small>views</small></div><h4>Texture and mood carry a frame without a landmark.</h4><p>Rain beading on a green railing has no famous subject, yet it held attention. Craft — focus, tone, a restrained palette — can be the whole story.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact">
+  <div class="bg" id="cbg"></div>
+  <div class="wrap">
+    <p class="mono rv" style="color:var(--amber)">Available for cover art, editorial &amp; brand work</p>
+    <h2 class="rv d1">Let’s make something<br>in <em>good light.</em></h2>
+    <p class="rv d2">Follow the ongoing series, see new work first, or get in touch about licensing.</p>
+    <a class="btn rv d3" href="https://www.tiktok.com/@hieuicon262" target="_blank" rel="noopener">TikTok · @hieuicon262 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h15m-4-4 4 4-4 4" stroke="currentColor"/></svg></a>
+  </div>
+</section>
+<footer class="mono"><span>© Hiếu Bùi — All photographs by the author</span><span>Shot on Canon EOS R50 · Graded in Lightroom · Hà Nội</span></footer>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="x" aria-label="Close">CLOSE ✕</button>
+  <button class="prev" aria-label="Previous">← PREV</button>
+  <button class="next" aria-label="Next">NEXT →</button>
+  <img alt="">
+  <div class="cap"><small class="mono" style="color:var(--amber)"></small><b></b></div>
+</div>
+
+<script>
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // loader
+  window.addEventListener('load',()=>setTimeout(()=>{
+    document.querySelector('.loader').classList.add('done');
+    document.body.classList.add('ready');
+  }, reduce?0:1900));
+  setTimeout(()=>{document.querySelector('.loader').classList.add('done');document.body.classList.add('ready');},4500);
+
+  // reveal
+  const io = new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{threshold:.15,rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.rv,.wipe,.step,.cover-stage').forEach(el=>io.observe(el));
+
+  // count-up
+  const cio = new IntersectionObserver(es=>es.forEach(e=>{
+    if(!e.isIntersecting) return; cio.unobserve(e.target);
+    const el=e.target, to=parseFloat(el.dataset.count), dec=+el.dataset.dec, sup=el.querySelector('sup').outerHTML;
+    const t0=performance.now(), dur=reduce?1:1800;
+    (function tick(t){const p=Math.min(1,(t-t0)/dur), v=to*(1-Math.pow(1-p,4));
+      el.innerHTML=v.toFixed(dec)+sup; if(p<1) requestAnimationFrame(tick);})(t0);
+  }),{threshold:.6});
+  document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+
+  // nav, progress, horizontal series, parallax
+  const nav=document.getElementById('nav'), prog=document.querySelector('.progress');
+  const hs=document.getElementById('hs'), track=hs.querySelector('.track'), bar=document.getElementById('hsbar'), hsn=document.getElementById('hsn');
+  const figs=track.querySelectorAll('.fig'), cbg=document.getElementById('cbg'), contact=document.getElementById('contact');
+  let hsDist=0;
+  function sizeHS(){
+    if(innerWidth<=800){hs.style.height='';hsDist=0;return;}
+    hsDist=Math.max(0,track.scrollWidth-innerWidth);
+    hs.style.height=(hsDist+innerHeight)+'px';
+  }
+  function onScroll(){
+    const y=scrollY, h=document.documentElement.scrollHeight-innerHeight;
+    prog.style.transform='scaleX('+(y/h)+')';
+    nav.classList.toggle('solid',y>60);
+    if(hsDist){
+      const top=hs.offsetTop, p=Math.min(1,Math.max(0,(y-top)/hsDist));
+      track.style.transform='translate3d('+(-p*hsDist)+'px,0,0)';
+      bar.style.transform='scaleX('+p+')';
+      hsn.textContent=String(Math.min(figs.length,Math.floor(p*figs.length)+1)).padStart(2,'0')+' / '+String(figs.length).padStart(2,'0');
+    }
+    if(!reduce){const r=contact.getBoundingClientRect();cbg.style.transform='translateY('+(r.top*-.12)+'px)';}
+  }
+  addEventListener('scroll',onScroll,{passive:true});
+  addEventListener('resize',()=>{sizeHS();onScroll();});
+  addEventListener('load',()=>{sizeHS();onScroll();});
+  sizeHS();onScroll();
+
+  // cursor
+  const cur=document.querySelector('.cursor');
+  if(matchMedia('(hover:hover)').matches){
+    let x=-100,y=-100,cx=x,cy=y;
+    addEventListener('mousemove',e=>{x=e.clientX;y=e.clientY;});
+    (function loop(){cx+=(x-cx)*.2;cy+=(y-cy)*.2;cur.style.transform='translate('+cx+'px,'+cy+'px)';requestAnimationFrame(loop);})();
+    document.querySelectorAll('.fig').forEach(f=>{f.addEventListener('mouseenter',()=>cur.classList.add('big'));f.addEventListener('mouseleave',()=>cur.classList.remove('big'));});
+  }
+
+  // lightbox
+  const lb=document.getElementById('lb'), lbImg=lb.querySelector('img'), lbT=lb.querySelector('.cap b'), lbS=lb.querySelector('.cap small');
+  const all=[...document.querySelectorAll('.fig')]; let idx=0;
+  function show(i){idx=(i+all.length)%all.length;const f=all[idx],img=f.querySelector('img'),[t,s]=(f.dataset.cap||'|').split('|');
+    lbImg.style.opacity=0;setTimeout(()=>{lbImg.src=img.src;lbImg.alt=img.alt;lbT.textContent=t;lbS.innerHTML=s;lbImg.style.opacity=1;},150);}
+  all.forEach((f,i)=>f.addEventListener('click',()=>{show(i);lb.classList.add('open');document.body.style.overflow='hidden';}));
+  function close(){lb.classList.remove('open');document.body.style.overflow='';}
+  lb.querySelector('.x').onclick=close; lb.querySelector('.prev').onclick=()=>show(idx-1); lb.querySelector('.next').onclick=()=>show(idx+1);
+  lb.addEventListener('click',e=>{if(e.target===lb)close();});
+  addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowRight')show(idx+1);if(e.key==='ArrowLeft')show(idx-1);});
+})();
+</script>
+</body>
+</html>
