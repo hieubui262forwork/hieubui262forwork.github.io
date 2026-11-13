@@ -242,6 +242,73 @@ section{position:relative}
 .g-third{grid-column:span 4;aspect-ratio:2/3}
 .g-center{grid-column:4/10;aspect-ratio:2/3}
 
+
+/* ---------- golden hour clock ---------- */
+.ghc{position:absolute;top:96px;right:4vw;z-index:3;display:flex;align-items:center;gap:10px;padding:9px 16px;border:1px solid rgba(221,204,164,.25);border-radius:99px;background:rgba(20,17,13,.62);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--sand);opacity:0;transition:opacity 1s .9s}
+.ready .ghc{opacity:1}
+.ghc i{flex:none;width:8px;height:8px;border-radius:50%;background:var(--amber);animation:pulse 2s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(233,162,59,.6)}70%{box-shadow:0 0 0 10px rgba(233,162,59,0)}100%{box-shadow:0 0 0 0 rgba(233,162,59,0)}}
+.ghc b{color:var(--paper);font-weight:400}
+@media(max-width:760px){.ghc{top:74px;left:4vw;right:auto;font-size:.58rem}}
+
+/* ---------- quote interlude ---------- */
+.interlude{position:relative;height:130vh;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center}
+.interlude .bg{position:absolute;inset:-18% 0;background:center/cover no-repeat url(img/27b34eb3.jpg);will-change:transform}
+.interlude::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(20,17,13,.25) 0%,rgba(20,17,13,.7) 55%,var(--ink) 92%)}
+.interlude blockquote{position:relative;z-index:2;width:min(1100px,90vw);font-family:var(--serif);font-weight:300;font-size:clamp(2rem,5.2vw,4.8rem);line-height:1.08;letter-spacing:-.02em}
+.interlude blockquote .w{opacity:.14;transition:opacity .5s ease,color .5s}
+.interlude blockquote .w.lit{opacity:1}
+.interlude blockquote .w.gold.lit{color:var(--amber);font-style:italic}
+.interlude cite{position:relative;z-index:2;display:block;margin-top:2.4rem;font-style:normal}
+
+/* ---------- a day in light ---------- */
+.day{position:relative;height:560vh}
+.day .stage{position:sticky;top:0;height:100vh;overflow:hidden;display:grid;grid-template-columns:1fr auto;align-items:center;gap:5vw;padding:0 6vw;background:#2a3340;transition:background-color 1.2s ease}
+.day .stage::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,0,0,.35));pointer-events:none}
+.day .left{position:relative;z-index:2}
+.day .arc{display:block;width:100%;max-width:520px;overflow:visible;margin-bottom:1.6rem}
+.day .time{font-family:var(--serif);font-weight:300;font-size:clamp(3.4rem,9vw,8.4rem);line-height:.95;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.day .lbl{font-family:var(--serif);font-style:italic;color:var(--amber);font-size:clamp(1.3rem,2.2vw,1.8rem);margin-top:.5rem}
+.day .desc{color:var(--sand);max-width:400px;margin-top:1rem;min-height:4.8em}
+.day .ticks{display:flex;gap:6px;margin-top:1.6rem;max-width:400px}
+.day .ticks span{flex:1;height:2px;background:rgba(221,204,164,.2);transition:background .5s}
+.day .ticks span.on{background:var(--amber)}
+.day .frames{position:relative;z-index:2;height:78vh;aspect-ratio:2/3;box-shadow:0 50px 100px -30px rgba(0,0,0,.7)}
+.day .frames img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.07);transition:opacity 1s var(--ease),transform 1.8s var(--ease)}
+.day .frames img.on{opacity:1;transform:none}
+.day .kicker{position:absolute;top:96px;left:6vw;z-index:2}
+@media(max-width:860px){
+  .day .stage{grid-template-columns:1fr;align-content:center;gap:24px;padding:90px 6vw 30px}
+  .day .frames{height:44vh;justify-self:start}
+  .day .arc{max-width:260px;margin-bottom:.6rem}.day .desc{min-height:0;font-size:.9rem}.day .kicker{top:70px}
+}
+
+/* ---------- bloom calendar ---------- */
+.bloom{margin-top:clamp(80px,12vh,130px);display:grid;grid-template-columns:1fr 1.05fr;gap:5vw;align-items:center}
+.bloom h4{font-family:var(--serif);font-weight:300;font-size:clamp(1.8rem,3.4vw,2.8rem);line-height:1.05}
+.months{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;margin:2rem 0 1.6rem}
+.months button{appearance:none;background:none;border:1px solid rgba(221,204,164,.12);color:var(--muted);font-family:var(--mono);font-size:.6rem;letter-spacing:.06em;padding:14px 0 18px;position:relative;cursor:pointer;transition:background .4s,color .4s,border-color .4s}
+.months button:disabled{opacity:.35;cursor:default}
+.months button.has{color:var(--paper);border-color:rgba(221,204,164,.35)}
+.months button.has::after{content:"";position:absolute;left:50%;bottom:6px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--amber)}
+.months button.act{background:var(--amber);color:var(--ink);border-color:var(--amber)}
+.months button.act::after{background:var(--ink)}
+.bloom .name{font-family:var(--serif);font-size:1.7rem;font-weight:400}
+.bloom .name small{display:block;font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:.4rem}
+.bloom .bnote{color:var(--sand);margin-top:.6rem;min-height:3.2em}
+.bloom .pv{position:relative;aspect-ratio:4/5;overflow:hidden;background:var(--ink2)}
+.bloom .pv img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.06);transition:opacity .9s var(--ease),transform 1.6s var(--ease)}
+.bloom .pv img.on{opacity:1;transform:none}
+.bloom .pv .bar{position:absolute;left:0;bottom:0;height:2px;background:var(--amber);width:0}
+.bloom .pv .bar.run{width:100%;transition:width 4.5s linear}
+@media(max-width:860px){.bloom{grid-template-columns:1fr}.months{grid-template-columns:repeat(6,1fr)}}
+
+/* ---------- image trail ---------- */
+.trail{position:absolute;width:150px;aspect-ratio:2/3;object-fit:cover;pointer-events:none;z-index:1;opacity:0;transform:translate(-50%,-50%) scale(.6) rotate(var(--r));animation:trail 1.3s var(--ease) forwards;box-shadow:0 20px 40px rgba(0,0,0,.5)}
+@keyframes trail{15%{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(var(--r))}65%{opacity:1}100%{opacity:0;transform:translate(-50%,-35%) scale(.9) rotate(var(--r))}}
+.trail-hint{position:relative;z-index:2;margin-top:2.2rem}
+@media(hover:none){.trail-hint{display:none}}
+
 /* ---------- process ---------- */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(221,204,164,.14)}
 .step{padding:2.4rem 1.8rem 2.4rem 0;border-right:1px solid rgba(221,204,164,.14);position:relative}
@@ -339,6 +406,7 @@ footer{padding:28px 4vw;display:flex;justify-content:space-between;flex-wrap:wra
       </div>
     </div>
   </div>
+  <div class="ghc" id="ghc" aria-live="polite"><i></i><span>Hà Nội</span></div>
   <div class="scrollcue mono">Scroll <i></i></div>
 </header>
 
@@ -427,6 +495,14 @@ footer{padding:28px 4vw;display:flex;justify-content:space-between;flex-wrap:wra
   </div>
 </section>
 
+<section class="interlude" id="interlude" aria-label="Quote">
+  <div class="bg" id="ibg"></div>
+  <div>
+    <blockquote id="quote">The light over Hà Nội changes every few minutes. I don’t chase it — I just keep showing up for *the last twenty minutes.*</blockquote>
+    <cite class="mono">— Hiếu Bùi, on golden hour</cite>
+  </div>
+</section>
+
 <!-- ============ 02 SERIES ============ -->
 <section id="series">
   <div class="wrap" style="padding-top:clamp(60px,10vh,110px)">
@@ -474,6 +550,16 @@ footer{padding:28px 4vw;display:flex;justify-content:space-between;flex-wrap:wra
 <figure class="fig wipe g-half" data-cap="Bằng lăng on campus|Seasons · Early summer"><img src="img/a6a2f7dc.jpg" alt="A tree covered in purple lagerstroemia flowers above students on benches" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Seasons · Early summer</small><b>Bằng lăng on campus</b></figcaption></figure>
 <figure class="fig wipe g-half" data-cap="Bougainvillea over the lake road|Hồ Tây · Overcast"><img src="img/bddad344.jpg" alt="Pink bougainvillea in the foreground of a lakeside road under a grey sky" loading="lazy" style="object-position:50% 70%"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>Hồ Tây · Overcast</small><b>Bougainvillea over the lake road</b></figcaption></figure>
       </div>
+      <div class="bloom">
+        <div class="rv">
+          <p class="mono" style="color:var(--amber)">The bloom calendar</p>
+          <h4>Hà Nội keeps time<br>with <em>flowers.</em></h4>
+          <div class="months" id="months"></div>
+          <div class="name" id="bname"></div>
+          <p class="bnote" id="bnote"></p>
+        </div>
+        <div class="pv rv d1" id="bpv"><div class="bar" id="bbar"></div></div>
+      </div>
     </div>
   </div>
 
@@ -512,6 +598,28 @@ footer{padding:28px 4vw;display:flex;justify-content:space-between;flex-wrap:wra
 <figure class="fig wipe g-center" data-cap="Christmas menu|F&amp;B · Seasonal menu"><img src="img/2616c18d.jpg" alt="Three festive drinks with ribbons beside Christmas decorations" loading="lazy"><div class="vf"><i></i><i></i><i></i><i></i></div><figcaption><small>F&amp;B · Seasonal menu</small><b>Christmas menu</b></figcaption></figure>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============ A DAY IN LIGHT ============ -->
+<section class="day" id="day" aria-label="A day in Hà Nội light">
+  <div class="stage" id="dstage">
+    <p class="mono kicker">Interlude — A day in Hà Nội light</p>
+    <div class="left">
+      <svg class="arc" viewBox="0 0 400 215" aria-hidden="true">
+        <defs><radialGradient id="sg"><stop offset="0" stop-color="#ffe3a3"/><stop offset=".5" stop-color="#e9a23b"/><stop offset="1" stop-color="#e9a23b" stop-opacity="0"/></radialGradient></defs>
+        <path d="M10 200 A190 190 0 0 1 390 200" fill="none" stroke="rgba(221,204,164,.25)" stroke-dasharray="2 6"/>
+        <path id="dprog" d="M10 200 A190 190 0 0 1 390 200" fill="none" stroke="#e9a23b" stroke-width="1.5"/>
+        <line x1="0" y1="200" x2="400" y2="200" stroke="rgba(221,204,164,.45)"/>
+        <g id="dsun"><circle r="26" fill="url(#sg)" opacity=".55"/><circle r="9" fill="#ffd27a"/></g>
+        <rect x="0" y="201" width="400" height="20" fill="currentColor" style="color:inherit" opacity="0"/>
+      </svg>
+      <div class="time" id="dtime">06:30</div>
+      <div class="lbl" id="dlbl">First light</div>
+      <p class="desc" id="ddesc"></p>
+      <div class="ticks" id="dticks"></div>
+    </div>
+    <div class="frames" id="dframes"></div>
   </div>
 </section>
 
@@ -580,6 +688,7 @@ footer{padding:28px 4vw;display:flex;justify-content:space-between;flex-wrap:wra
     <h2 class="rv d1">Let’s make something<br>in <em>good light.</em></h2>
     <p class="rv d2">Follow the ongoing series, see new work first, or get in touch about licensing.</p>
     <a class="btn rv d3" href="https://www.tiktok.com/@hieuicon262" target="_blank" rel="noopener">TikTok · @hieuicon262 <svg width="16" height="10" viewBox="0 0 16 10" fill="none"><path d="M0 5h15m-4-4 4 4-4 4" stroke="currentColor"/></svg></a>
+    <p class="mono trail-hint rv d3">✦ Move your cursor across the light</p>
   </div>
 </section>
 <footer class="mono"><span>© Hiếu Bùi — All photographs by the author</span><span>Shot on Canon EOS R50 · Graded in Lightroom · Hà Nội</span></footer>
@@ -662,6 +771,121 @@ footer{padding:28px 4vw;display:flex;justify-content:space-between;flex-wrap:wra
   lb.querySelector('.x').onclick=close; lb.querySelector('.prev').onclick=()=>show(idx-1); lb.querySelector('.next').onclick=()=>show(idx+1);
   lb.addEventListener('click',e=>{if(e.target===lb)close();});
   addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowRight')show(idx+1);if(e.key==='ArrowLeft')show(idx-1);});
+
+  // ---------- golden hour clock (NOAA sunset approximation for Hà Nội) ----------
+  (function(){
+    const el=document.getElementById('ghc'); if(!el) return;
+    const LAT=21.0285*Math.PI/180, LON=105.8542, TZ=7*3600e3;
+    function sunsetUTC(y,m,d){
+      const n=Math.round((Date.UTC(y,m,d)-Date.UTC(y,0,0))/864e5), g=2*Math.PI/365*(n-1);
+      const eq=229.18*(0.000075+0.001868*Math.cos(g)-0.032077*Math.sin(g)-0.014615*Math.cos(2*g)-0.040849*Math.sin(2*g));
+      const de=0.006918-0.399912*Math.cos(g)+0.070257*Math.sin(g)-0.006758*Math.cos(2*g)+0.000907*Math.sin(2*g)-0.002697*Math.cos(3*g)+0.00148*Math.sin(3*g);
+      const ha=Math.acos(Math.cos(90.833*Math.PI/180)/(Math.cos(LAT)*Math.cos(de))-Math.tan(LAT)*Math.tan(de))*180/Math.PI;
+      return Date.UTC(y,m,d)+(720-4*(LON-ha)-eq)*6e4;
+    }
+    const hm=ms=>{const t=new Date(ms+TZ);return String(t.getUTCHours()).padStart(2,'0')+':'+String(t.getUTCMinutes()).padStart(2,'0');};
+    const dur=ms=>{const m=Math.round(ms/6e4),h=Math.floor(m/60);return (h?h+'h ':'')+(m%60)+'m';};
+    function tick(){
+      const now=Date.now(), l=new Date(now+TZ), y=l.getUTCFullYear(), mo=l.getUTCMonth(), d=l.getUTCDate();
+      const ss=sunsetUTC(y,mo,d), gs=ss-55*6e4, be=ss+25*6e4; let msg;
+      if(now<gs) msg='Golden hour in <b>'+dur(gs-now)+'</b>';
+      else if(now<ss) msg='<b>Golden hour now</b> · sunset '+hm(ss);
+      else if(now<be) msg='<b>Blue hour now</b>';
+      else {const t=new Date(now+TZ+864e5);msg='Next golden hour <b>'+hm(sunsetUTC(t.getUTCFullYear(),t.getUTCMonth(),t.getUTCDate())-55*6e4)+'</b>';}
+      el.innerHTML='<i></i><span>Hà Nội <b>'+hm(now)+'</b> · '+msg+'</span>';
+    }
+    tick(); setInterval(tick,30000);
+  })();
+
+  // ---------- quote: words light up on scroll ----------
+  const q=document.getElementById('quote'), isec=document.getElementById('interlude'), ibg=document.getElementById('ibg');
+  (function(){
+    const parts=q.textContent.split('*'); q.innerHTML='';
+    parts.forEach((p,k)=>p.split(/\s+/).filter(Boolean).forEach(w=>{const sp=document.createElement('span');sp.className='w'+(k===1?' gold':'');sp.textContent=w+' ';q.appendChild(sp);}));
+  })();
+  const qw=[...q.querySelectorAll('.w')];
+  function onQuote(){
+    const r=isec.getBoundingClientRect();
+    if(r.bottom<0||r.top>innerHeight) return;
+    const p=Math.min(1,Math.max(0,(innerHeight*.8-r.top)/(r.height*.6)));
+    const lit=reduce?qw.length:Math.round(p*qw.length);
+    qw.forEach((w,i)=>w.classList.toggle('lit',i<lit));
+    if(!reduce) ibg.style.transform='translateY('+(r.top*-.15)+'px)';
+  }
+
+  // ---------- a day in light ----------
+  const IMG=k=>document.querySelector('img[data-k="'+k+'"]');
+  const stops=[
+    {t:'06:30',l:'First light',d:'Low sun slices through the canopy. Traffic is still soft, and the haze turns every ray into a beam.',bg:'#27303a',src:'img/38663d43.jpg'},
+    {t:'08:00',l:'Morning shade',d:'The old boulevards at their emptiest — long trunks, dappled tarmac, a single cyclist in the distance.',bg:'#2f3127',src:'img/3d7c106a.jpg'},
+    {t:'16:30',l:'Late afternoon',d:'Light goes warm and sideways. The parks fill with walkers and every lawn gets long shadows.',bg:'#2e3a1d',src:'img/ff55b814.jpg'},
+    {t:'17:10',l:'Golden hour',d:'The twenty minutes I build the day around. Backlight, silhouettes, and gold bouncing off the lake.',bg:'#4a3011',src:'img/7176b343.jpg'},
+    {t:'17:35',l:'Sunset',d:'The sun is gone but the sky isn’t done — the gradient from orange to blue is where the colour lives.',bg:'#3d2216',src:'img/5b7529b6.jpg'},
+    {t:'17:50',l:'Blue hour',d:'A few towers still catch the last sun while the sky cools to teal. Exposure for the highlights, nothing else.',bg:'#10303a',src:'img/f75f484d.jpg'},
+    {t:'19:30',l:'After dark',d:'When it rains, streetlamps turn every drop into sparks. A different kind of golden hour.',bg:'#0d1320',src:'img/d27f5e5a.jpg'}
+  ];
+  const dsec=document.getElementById('day'), dst=document.getElementById('dstage'), dfr=document.getElementById('dframes'), dtk=document.getElementById('dticks');
+  const dsun=document.getElementById('dsun'), dprog=document.getElementById('dprog'), L=Math.PI*190;
+  dprog.style.strokeDasharray=L; dprog.style.strokeDashoffset=L;
+  const dimgs=stops.map((s,i)=>{const im=document.createElement('img');im.src=s.src;im.alt=s.l+' in Hà Nội';im.loading='lazy';dfr.appendChild(im);dtk.appendChild(document.createElement('span'));return im;});
+  const dticks=[...dtk.children]; let didx=-1;
+  function setStop(i){
+    if(i===didx) return; didx=i; const s=stops[i];
+    document.getElementById('dtime').textContent=s.t; document.getElementById('dlbl').textContent=s.l; document.getElementById('ddesc').textContent=s.d;
+    dst.style.backgroundColor=s.bg; dimgs.forEach((im,k)=>im.classList.toggle('on',k===i)); dticks.forEach((t,k)=>t.classList.toggle('on',k<=i));
+  }
+  function onDay(){
+    const r=dsec.getBoundingClientRect(); if(r.bottom<0||r.top>innerHeight) return;
+    const p=Math.min(1,Math.max(0,-r.top/(dsec.offsetHeight-innerHeight)));
+    setStop(Math.min(stops.length-1,Math.floor(p*stops.length)));
+    const SET=.78, q=Math.min(1,p/SET), a=Math.PI*(1-q);
+    let x=200+190*Math.cos(a), y=200-190*Math.sin(a), o=1;
+    if(p>SET){const k=(p-SET)/(1-SET); y=200+k*40; o=1-k;}
+    dsun.setAttribute('transform','translate('+x+','+y+')'); dsun.style.opacity=o;
+    dprog.style.strokeDashoffset=L*(1-q);
+  }
+  setStop(0);
+
+  // ---------- bloom calendar ----------
+  const blooms={2:{n:'Hoa sưa',e:'March',t:'Two short weeks when the old streets turn white. Everyone in the city knows to look up.',src:'img/d8a8395c.jpg'},
+    4:{n:'Bằng lăng',e:'May',t:'Purple crowns over schoolyards and campuses — the colour of exam season.',src:'img/a6a2f7dc.jpg'},
+    5:{n:'Sen & hướng dương',e:'June',t:'Flower carts load up with lotus buds and sunflowers as summer arrives.',src:'img/083349b3.jpg'},
+    7:{n:'Mưa mùa hạ',e:'August',t:'Not a flower, but a season: sudden storms that turn the streetlights to sparks.',src:'img/d27f5e5a.jpg'},
+    9:{n:'Hồng ngâm',e:'October',t:'Autumn arrives in baskets. Persimmons, street vendors and soft low sun.',src:'img/04c0ecff.jpg'},
+    10:{n:'Cúc họa mi',e:'November',t:'Tiny white daisies for a few weeks only — the city’s favourite sign of early winter.',src:'img/d4ec88f5.jpg'},
+    11:{n:'Xe hoa cuối năm',e:'December',t:'Roses and daisies on bicycles parked along quiet streets in the cold.',src:'img/50541d75.jpg'}};
+  const mbox=document.getElementById('months'), bpv=document.getElementById('bpv'), bbar=document.getElementById('bbar');
+  const MN=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'], keys=Object.keys(blooms).map(Number), bimgs={};
+  MN.forEach((m,i)=>{const b=document.createElement('button');b.textContent=m;b.type='button';
+    if(blooms[i]){b.className='has';b.addEventListener('click',()=>{auto=false;bloomGo(i);});const im=document.createElement('img');im.src=blooms[i].src;im.alt=blooms[i].n;im.loading='lazy';bpv.insertBefore(im,bbar);bimgs[i]=im;} else b.disabled=true;
+    mbox.appendChild(b);});
+  let bcur=null, auto=true, btimer;
+  function bloomGo(i){
+    bcur=i; const B=blooms[i];
+    [...mbox.children].forEach((b,k)=>b.classList.toggle('act',k===i));
+    Object.entries(bimgs).forEach(([k,im])=>im.classList.toggle('on',+k===i));
+    document.getElementById('bname').innerHTML='<small>'+B.e+'</small>'+B.n;
+    document.getElementById('bnote').textContent=B.t;
+    clearTimeout(btimer); bbar.classList.remove('run'); void bbar.offsetWidth;
+    if(auto&&!reduce){bbar.classList.add('run');btimer=setTimeout(()=>bloomGo(keys[(keys.indexOf(i)+1)%keys.length]),4500);}
+  }
+  const bio=new IntersectionObserver(es=>{if(es[0].isIntersecting){bloomGo(bcur??keys[0]);bio.disconnect();}},{threshold:.3});
+  bio.observe(bpv);
+
+  // ---------- image trail in contact ----------
+  if(matchMedia('(hover:hover)').matches && !reduce){
+    const pool=[...document.querySelectorAll('.fig img')].map(i=>i.src); let lx=0,ly=0,pi=0;
+    contact.addEventListener('mousemove',e=>{
+      const r=contact.getBoundingClientRect(), x=e.clientX-r.left, y=e.clientY-r.top;
+      if(Math.hypot(x-lx,y-ly)<95) return; lx=x; ly=y;
+      const im=document.createElement('img'); im.className='trail'; im.src=pool[pi++%pool.length]; im.alt='';
+      im.style.left=x+'px'; im.style.top=y+'px'; im.style.setProperty('--r',(Math.random()*16-8)+'deg');
+      contact.appendChild(im); setTimeout(()=>im.remove(),1300);
+    });
+  }
+  addEventListener('scroll',()=>{onQuote();onDay();},{passive:true});
+  addEventListener('resize',()=>{onQuote();onDay();});
+  onQuote();onDay();
 })();
 </script>
 </body>
