@@ -309,6 +309,33 @@ section{position:relative}
 .trail-hint{position:relative;z-index:2;margin-top:2.2rem}
 @media(hover:none){.trail-hint{display:none}}
 
+
+/* ---------- music player ---------- */
+.music{position:fixed;right:22px;bottom:22px;z-index:85;display:flex;flex-direction:column;align-items:flex-end;gap:10px;opacity:0;transform:translateY(12px);transition:opacity .8s 1.2s,transform .8s 1.2s var(--ease)}
+.ready .music{opacity:1;transform:none}
+.music .pill{display:flex;align-items:center;gap:12px;padding:8px 16px 8px 8px;border-radius:99px;border:1px solid rgba(233,162,59,.4);background:rgba(20,17,13,.78);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);color:var(--sand);cursor:pointer;font:inherit;transition:border-color .4s,background .4s}
+.music .pill:hover{border-color:var(--amber)}
+.music .disc{position:relative;width:34px;height:34px;border-radius:50%;background:radial-gradient(circle,var(--amber) 0 18%,#111 19% 24%,#1d1a15 25%);box-shadow:inset 0 0 0 1px rgba(255,255,255,.06)}
+.music .disc::before{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-radial-gradient(circle,transparent 0 2px,rgba(255,255,255,.05) 2px 3px)}
+.music.playing .disc{animation:spin 3.2s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.music .meta{display:flex;flex-direction:column;align-items:flex-start;line-height:1.2;text-align:left}
+.music .meta b{font-family:var(--serif);font-style:italic;font-weight:400;font-size:.95rem;color:var(--paper)}
+.music .meta small{font-family:var(--mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.music .eq{display:flex;align-items:flex-end;gap:2px;height:14px;margin-left:4px}
+.music .eq i{width:2px;height:30%;background:var(--amber);border-radius:1px}
+.music.playing .eq i{animation:eq 1s ease-in-out infinite}
+.music.playing .eq i:nth-child(2){animation-delay:-.4s}.music.playing .eq i:nth-child(3){animation-delay:-.7s}.music.playing .eq i:nth-child(4){animation-delay:-.2s}
+@keyframes eq{0%,100%{height:25%}50%{height:100%}}
+.music .panel{width:min(360px,calc(100vw - 44px));border-radius:14px;overflow:hidden;background:#181512;border:1px solid rgba(221,204,164,.15);box-shadow:0 30px 60px rgba(0,0,0,.55);transform-origin:100% 100%;transform:scale(.92) translateY(10px);opacity:0;visibility:hidden;transition:all .45s var(--ease)}
+.music.open .panel{transform:none;opacity:1;visibility:visible}
+.music .panel .ph{display:flex;justify-content:space-between;align-items:center;padding:10px 14px}
+.music .panel .ph button{background:none;border:0;color:var(--muted);cursor:pointer;font-family:var(--mono);font-size:.62rem;letter-spacing:.12em}
+.music .panel .ph button:hover{color:var(--amber)}
+.music .embed{height:152px}
+.music .embed iframe{display:block;width:100%;height:152px;border:0}
+@media(max-width:760px){.music{right:12px;bottom:12px}.music .meta small{display:none}.music .pill{padding:6px 12px 6px 6px}}
+
 /* ---------- process ---------- */
 .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid rgba(221,204,164,.14)}
 .step{padding:2.4rem 1.8rem 2.4rem 0;border-right:1px solid rgba(221,204,164,.14);position:relative}
@@ -693,6 +720,17 @@ footer{padding:28px 4vw;display:flex;justify-content:space-between;flex-wrap:wra
 </section>
 <footer class="mono"><span>© Hiếu Bùi — All photographs by the author</span><span>Shot on Canon EOS R50 · Graded in Lightroom · Hà Nội</span></footer>
 
+<div class="music" id="music">
+  <div class="panel" id="mpanel" aria-hidden="true">
+    <div class="ph"><span class="mono">Soundtrack for this page</span><button type="button" id="mclose" aria-label="Hide player">HIDE ✕</button></div>
+    <div class="embed" id="membed"></div>
+  </div>
+  <button class="pill" type="button" id="mpill" aria-expanded="false" aria-controls="mpanel">
+    <span class="disc" aria-hidden="true"></span>
+    <span class="meta"><b>golden hour</b><small>JVKE · press to play</small></span>
+    <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  </button>
+</div>
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Image viewer">
   <button class="x" aria-label="Close">CLOSE ✕</button>
   <button class="prev" aria-label="Previous">← PREV</button>
@@ -886,6 +924,32 @@ footer{padding:28px 4vw;display:flex;justify-content:space-between;flex-wrap:wra
   addEventListener('scroll',()=>{onQuote();onDay();},{passive:true});
   addEventListener('resize',()=>{onQuote();onDay();});
   onQuote();onDay();
+
+  // ---------- music (official Spotify embed) ----------
+  (function(){
+    const box=document.getElementById('music'), pill=document.getElementById('mpill'), emb=document.getElementById('membed'), panel=document.getElementById('mpanel');
+    const ID='4yNk9iz9WVJikRFle3XEvn'; let ctrl=null, built=false, apiReady=null;
+    window.onSpotifyIframeApiReady=api=>{apiReady=api;};
+    function build(){
+      if(built) return; built=true;
+      const host=document.createElement('div'); emb.appendChild(host);
+      const fallback=()=>{emb.innerHTML='<iframe src="https://open.spotify.com/embed/track/'+ID+'?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy" title="golden hour by JVKE on Spotify"></iframe>';};
+      const start=Date.now();
+      (function wait(){
+        if(apiReady){
+          apiReady.createController(host,{uri:'spotify:track:'+ID,width:'100%',height:152,theme:'dark'},c=>{
+            ctrl=c;
+            c.addListener('ready',()=>{try{c.play();}catch(e){}});
+            c.addListener('playback_update',e=>{const p=!e.data.isPaused&&!e.data.isBuffering; box.classList.toggle('playing',p); pill.querySelector('small').textContent='JVKE · '+(p?'now playing':'paused');});
+          });
+        } else if(Date.now()-start<4000) setTimeout(wait,150); else fallback();
+      })();
+    }
+    function open(v){box.classList.toggle('open',v);pill.setAttribute('aria-expanded',v);panel.setAttribute('aria-hidden',!v);}
+    pill.addEventListener('click',()=>{ if(!built){build();open(true);return;} if(ctrl){ctrl.togglePlay();} open(true); });
+    document.getElementById('mclose').addEventListener('click',()=>open(false));
+    const sc=document.createElement('script'); sc.src='https://open.spotify.com/embed/iframe-api/v1'; sc.async=true; document.body.appendChild(sc);
+  })();
 })();
 </script>
 </body>
